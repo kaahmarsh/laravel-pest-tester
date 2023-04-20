@@ -8,7 +8,7 @@ interface UserRepositoryInterface
 {
     public function findAll(): array;
 
-    public static function findById(string $userId): User;
+    public static function findById(string $userId): User | Null;
 
     public function findByEmail(string $email): User;
 

@@ -60,20 +60,21 @@ class UserService
         $this->repository->updatePassword($user);
         
         return response()->json([
-            'success' => true,
-            'data' => [
-                $user
-            ]
+            'message' => 'Atualizado com sucesso',
         ],200);
     }
 
     public function delete($user)
     {
-        $this->repository->deleteById($user);
-        
-        return response()->json(
-            ['succes' => true]
-        ,200);
+       try {
+            $this->repository->deleteById($user);
+            
+            return response()->json(
+                ['message' => 'Deletado com sucesso']
+            ,200);
+       } catch (\Throwable $th) {
+            throw $th;
+       }
     }
 
     public function forgotPassword($request)

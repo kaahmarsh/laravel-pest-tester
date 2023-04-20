@@ -11,7 +11,7 @@ class UserRepository implements UserRepositoryInterface
     {
         return User::all()->toArray();
     }
-    public static function findById(string $userId): User
+    public static function findById($userId): User | Null
     {
         return User::find($userId);
     }

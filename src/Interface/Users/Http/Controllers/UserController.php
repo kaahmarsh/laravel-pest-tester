@@ -45,9 +45,13 @@ class UserController
         return $this->service->update($id,$request);
     }
 
-    public function show(User $id)
+    public function show($id)
     {
-        return $this->repository->findById($id);
+        try {
+            return $this->repository->findById($id);
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     public function delete(User $id)
