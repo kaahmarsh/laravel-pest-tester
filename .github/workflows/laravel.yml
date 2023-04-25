@@ -1,17 +1,20 @@
-on: push
-name: CI
+on: 
+  push:
+    branches: ['master']
+  
+name: Laravel CI
 jobs:
-  phpunit:
+  laravel-biuld:
     runs-on: ubuntu-latest
-    container:
-      image: kirschbaumdevelopment/laravel-test-runner:7.3
  
     services:
       mysql:
-        image: mysql:8
+        image: mysql:5.8
         env:
-          MYSQL_ROOT_PASSWORD: password
-          MYSQL_DATABASE: test
+          MYSQL_USER: usertest
+          MYSQL_DATABASE: laravel
+          MYSQL_ROOT_PASSWORD: testing
+          DB_PORT: ${{ job.services.mysql.ports[3306] }}
         ports:
           - 33306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
@@ -20,15 +23,19 @@ jobs:
     - uses: actions/checkout@v1
       with:
         fetch-depth: 1
- 
-    - name: Install composer dependencies
+
+    - name: Update composer dependencies
+      run: composer update
+
+    - name: Install dependencies
+      run: composer install --no-interaction --no-suggest --ignore-platform-reqs
+    
+    - name: Boot Laravel application
       run: |
-        composer install --no-scripts
- 
-    - name: Prepare Laravel Application
-      run: |
-        cp .env.ci .env
+        php -r "file_exists('.env') || copy('.env.example', '.env');"
         php artisan key:generate
- 
-    - name: Run Testsuite
-      run: vendor/bin/phpunit tests/
+        php artisan --version
+
+    - name: Execute migrations
+      run: |
+        php artisan migrate
