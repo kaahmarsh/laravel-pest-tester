@@ -13,7 +13,7 @@ jobs:
         env:
           MYSQL_USER: usertest
           MYSQL_PASSWORD: 
-          MYSQL_DATABASE: testdatabase
+          MYSQL_DATABASE: laravel
           MYSQL_ROOT_PASSWORD: testing
           DB_PORT: ${{ job.services.mysql.ports[3306] }}
         ports:
