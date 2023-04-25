@@ -12,7 +12,7 @@ jobs:
         image: mysql:5.7
         env:
           MYSQL_USER: usertest
-          MYSQL_PASSWORD: 
+          MYSQL_PASSWORD: testing
           MYSQL_DATABASE: laravel
           MYSQL_ROOT_PASSWORD: testing
           DB_PORT: ${{ job.services.mysql.ports[3306] }}
@@ -38,7 +38,5 @@ jobs:
         php artisan --version
 
     - name: Run migrations
-      env:
-        
       run: |
         php artisan migrate
