@@ -16,7 +16,7 @@ jobs:
       with:
         php-version: '8.1'
     - uses: actions/checkout@v3
-    - name: Update Composer
+    - name: update composer
       run: composer update
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.example', '.env');"
@@ -30,10 +30,8 @@ jobs:
       run: |
         mkdir -p database
         touch database/database.sqlite
-    - name: Run Migrations
-      run: php artisan migrate
-    - name: Execute tests (Unit and Feature tests) via Pest
+    - name: Execute tests (Unit and Feature tests) via PHPUnit
       env:
         DB_CONNECTION: sqlite
         DB_DATABASE: database/database.sqlite
-      run: vendor/bin/pest
+      run: vendor/bin/phpunit
