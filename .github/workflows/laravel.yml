@@ -4,7 +4,7 @@ on:
   
 name: Laravel CI
 jobs:
-  phpunit:
+  laravel-biuld:
     runs-on: ubuntu-latest
  
     services:
@@ -13,7 +13,7 @@ jobs:
         env:
           MYSQL_USER: usertest
           MYSQL_PASSWORD: 
-          MYSQL_DATABASE: testdatabase
+          MYSQL_DATABASE: laravel
           MYSQL_ROOT_PASSWORD: testing
           DB_PORT: ${{ job.services.mysql.ports[3306] }}
         ports:
@@ -38,10 +38,5 @@ jobs:
         php artisan --version
 
     - name: Execute migrations
-      env:
-        DB_CONNECTION: mysql
-        DB_PORT: ${{ job.services.mysql.ports[3306] }}
-        DB_USER: usertest
-        DB_PASSWORD: testing
       run: |
         php artisan migrate
