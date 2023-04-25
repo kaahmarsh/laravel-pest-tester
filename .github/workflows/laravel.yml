@@ -6,10 +6,10 @@ name: Laravel CI
 jobs:
   laravel-biuld:
     runs-on: ubuntu-latest
-    env:
-      DB_DATABASE: test_db
-      DB_USER: root
-      DB_PASSWORD: root
+    # env:
+    #   DB_DATABASE: test_db
+    #   DB_USER: root
+    #   DB_PASSWORD: root
     # services:
     #   mysql:
     #     image: mysql:8.0
