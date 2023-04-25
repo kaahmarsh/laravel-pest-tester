@@ -31,10 +31,10 @@ jobs:
 
     - name: Verify MySQL connection
       run: |
+        composer update
         mysql --host 127.0.0.1 --port ${{ job.services.mysql.ports['3306'] }} -uuser -psecret -e "SHOW DATABASES"
     - name: Install dependencies
       run: |
-        composer update
         php --version
         composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
         chmod -R 777 storage bootstrap/cache
