@@ -37,11 +37,8 @@ jobs:
         php artisan key:generate
         php artisan --version
 
-    - name: Execute migrations
+    - name: Run migrations
       env:
-        DB_CONNECTION: mysql
-        DB_PORT: ${{ job.services.mysql.ports[3306] }}
-        DB_USER: usertest
-        DB_PASSWORD: testing
+        
       run: |
         php artisan migrate
