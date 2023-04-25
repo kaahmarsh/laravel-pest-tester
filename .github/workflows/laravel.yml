@@ -11,10 +11,10 @@ jobs:
       mysql:
         image: mysql:5.7
         env:
-          MYSQL_USER: root
+          MYSQL_USER: usertest
           MYSQL_PASSWORD: 
           MYSQL_DATABASE: testdatabase
-          MYSQL_ROOT_PASSWORD: root
+          MYSQL_ROOT_PASSWORD: testin
           DB_PORT: ${{ job.services.mysql.ports[3306] }}
         ports:
           - 33306:3306
